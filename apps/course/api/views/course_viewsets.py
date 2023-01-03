@@ -1,7 +1,7 @@
 from rest_framework import viewsets
 from rest_framework import generics, status
 from rest_framework.response import Response
-from apps.authentication.authentication_mixins import Authentication
+# from apps.authentication.authentication_mixins import Authentication
 from apps.course.api.serializers.course_serializers import CourseSerializer
 
 

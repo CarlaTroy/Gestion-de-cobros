@@ -29,7 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Application definition
-AUTH_USER_MODEL = 'authentication.User'
+# AUTH_USER_MODEL = 'authentication.User'
 
 BASE_APPS = [
     'django.contrib.admin',
@@ -45,7 +45,7 @@ LOCAL_APPS = [
     'apps.course',
     'apps.student',
     'apps.enrollment',
-    'apps.authentication',
+    #'apps.authentication',
     'apps.base',
 ]
 
@@ -53,7 +53,6 @@ THIRD_APPS = [
     'rest_framework_swagger',
     'rest_framework',
     'rest_framework.authtoken',
-    # 'django.contrib.staticfiles',
     'drf_yasg',
     'simple_history',
 

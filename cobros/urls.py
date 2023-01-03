@@ -5,7 +5,7 @@ from drf_yasg import openapi
 from django.contrib import admin
 from django.urls import path, include, re_path
 
-from apps.authentication.views import Login, Logout, UserToken
+#from apps.authentication.views import Login, Logout, UserToken
 
 schema_view = get_schema_view(
    openapi.Info(
@@ -26,10 +26,10 @@ urlpatterns = [
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('admin/', admin.site.urls),
-    path('', Login.as_view(), name = 'Login'),
-    path('Logout/', Logout.as_view(), name='Logout'),
-    path('refresh-token/', UserToken.as_view(), name='refresh_token'),
-    path('users/', include('apps.authentication.api.urls')),
+    #path('', Login.as_view(), name='Login'),
+    #path('Logout/', Logout.as_view(), name='Logout'),
+    #path('refresh-token/', UserToken.as_view(), name='refresh_token'),
+    #path('users/', include('apps.authentication.api.urls')),
     path('students/', include('apps.student.api.routers')),
     path('courses/', include('apps.course.api.routers')),
     path('enrollment/', include('apps.enrollment.api.routers')),
