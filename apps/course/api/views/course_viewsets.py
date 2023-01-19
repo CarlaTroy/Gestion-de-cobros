@@ -1,11 +1,11 @@
 from rest_framework import viewsets
 from rest_framework import generics, status
 from rest_framework.response import Response
-# from apps.authentication.authentication_mixins import Authentication
+from apps.users.authentication_mixins import Authentication
 from apps.course.api.serializers.course_serializers import CourseSerializer
 
 
-class CourseViewSet(viewsets.ModelViewSet):
+class CourseViewSet(Authentication, viewsets.ModelViewSet):
     serializer_class = CourseSerializer
 
     def get_queryset(self, pk=None):
@@ -15,6 +15,7 @@ class CourseViewSet(viewsets.ModelViewSet):
             return self.get_serializer().Meta.model.objects.filter(id=pk, state=True).first()
 
     def list(self, request):
+        #print(self.user)
         course_serializer = self.get_serializer(self.get_queryset(), many=True)
         return Response(course_serializer.data, status=status.HTTP_200_OK)
 

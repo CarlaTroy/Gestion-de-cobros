@@ -29,7 +29,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 # Application definition
-# AUTH_USER_MODEL = 'authentication.User'
+AUTH_USER_MODEL = 'users.User'
 
 BASE_APPS = [
     'django.contrib.admin',
@@ -38,32 +38,35 @@ BASE_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django_extensions',
+    #'django_extensions',
 ]
 
 LOCAL_APPS = [
     'apps.course',
     'apps.student',
     'apps.enrollment',
-    #'apps.authentication',
+    'apps.users',
     'apps.base',
 ]
 
 THIRD_APPS = [
+    'corsheaders',
     'rest_framework_swagger',
     'rest_framework',
     'rest_framework.authtoken',
     'drf_yasg',
     'simple_history',
+    
 
 ]
 INSTALLED_APPS = BASE_APPS + LOCAL_APPS + THIRD_APPS
 
 SWAGGER_SETTINGS = {
-    'DOC_EXPANSION': 'none '
+    'DOC_EXPANSION': 'none ',
+    #'DEFAULT_GENERATOR_CLASS': 'rest_framework.schemas.generators.BaseSchemaGenerator',
 }
 
-TOKEN_EXPIRED_AFTER_SECONDS = 900
+TOKEN_EXPIRED_AFTER_SECONDS = 9000
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
@@ -72,13 +75,16 @@ REST_FRAMEWORK = {
 }
 
 MIDDLEWARE = [
+    
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    #'corsheaders.middleware.CorsMiddlewar',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
 ROOT_URLCONF = 'cobros.urls'
@@ -102,15 +108,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'cobros.wsgi.application'
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -141,13 +138,23 @@ USE_I18N = True
 
 USE_TZ = True
 
+CORS_ALLOWED_ORIGINS = [
+    #"https://example.com",
+    #"https://sub.example.com",
+    'http://localhost:3000',
+    #"http://127.0.0.1:9000",
+]
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+]
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static/'),
+    #os.path.join(BASE_DIR, 'static/'),
 )
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
